@@ -1,8 +1,10 @@
 import "dotenv/config";
-import config from "./config/config";
+import DiscordClient from "./config/client";
+
 
 console.log("funka, World!");
 
-console.log(config.getConfig());
+const client = new DiscordClient();
+client.init();
 
 console.log("no funka, World!");
