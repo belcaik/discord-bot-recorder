@@ -3,4 +3,5 @@ export default interface TConfig {
     publicKey: string;
     token: string;
     intents: number;
+    guildId: string;
 }
