@@ -6,7 +6,7 @@
     "start": "node ./dist/index.js",
     "test": "jest",
     "watch": "tsc -w",
-    "dev:local": "dotenv -e .env.local yarn start"
+    "dev:local": "dotenv -e .env.local ts-node-dev ./src/index.ts --respawn --transpile-only --poll"
   },
   "devDependencies": {
     "@types/eslint": "^8",
@@ -14,8 +14,11 @@
     "@types/node": "^20.11.17",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
+    "@yarnpkg/pnpify": "^4.0.1",
     "dotenv-cli": "^7.3.0",
     "eslint": "^8.56.0",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {
