@@ -1,0 +1,13 @@
+{
+  "name": "discord-bot-recorder",
+  "packageManager": "yarn@4.1.0",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/app.js"
+  },
+  "devDependencies": {
+    
+    "@types/node": "^20.11.17",
+    "typescript": "^5.3.3"
+  }
+}
