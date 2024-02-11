@@ -6,7 +6,7 @@
     "start": "node ./dist/index.js",
     "test": "jest",
     "watch": "tsc -w",
-    "dev:local": "dotenv-cli -e .env.local yarn watch"
+    "dev:local": "dotenv -e .env.local yarn start"
   },
   "devDependencies": {
     "@types/eslint": "^8",
