@@ -6,8 +6,13 @@
     "start": "node ./dist/app.js"
   },
   "devDependencies": {
-    
+    "@types/libsodium-wrappers": "^0",
     "@types/node": "^20.11.17",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@discordjs/voice": "^0.16.1",
+    "discord.js": "^14.14.1",
+    "libsodium-wrappers": "^0.7.13"
   }
 }
