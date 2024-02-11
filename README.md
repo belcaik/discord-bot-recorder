@@ -22,7 +22,8 @@ yarn dlx @yarnpkg/sdks <sdk-version>
 yarn dlx @yarnpkg/sdks vscode
 ```
 
-> **_Note:_**  for more information read the [yarn editor sdks documentation](https://yarnpkg.com/getting-started/editor-sdks)
+> [!NOTE]
+> for more information read the [yarn editor sdks documentation](https://yarnpkg.com/getting-started/editor-sdks)
 
 ## Start project
 
