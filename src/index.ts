@@ -12,6 +12,21 @@ const commands = [ping.data.toJSON()];
 
 const rest = new REST().setToken(token);
 
+(async ()=>{
+    console.log('Started refreshing application (/) commands.');   
+    try {
+        console.log('Started refreshing application (/) commands.');
+        await rest.put(
+            Routes.applicationGuildCommands(applicationId, guildId),
+            { body: commands },
+        );
+
+        console.log('Successfully reloaded application (/) commands.');
+    } catch (error) {
+        console.error(error);
+    }
+})();
+
 
 
 
@@ -31,37 +46,29 @@ client.on("ready", () => {
 
 
 client.on(Events.InteractionCreate, async (interaction) => {
-    if (!interaction.isCommand()) return;
+    if (!interaction.isChatInputCommand()) return;
 
-    const { commandName } = interaction;
 
+    const commandName = interaction.commandName;
     const command = client.commands.get(commandName);
 
-    if (!command) return;
+    if (!command) {
+        console.error("Command not found");
+        return;
+    }
 
     try {
         await command.execute(interaction);
     } catch (error) {
         console.error(error);
-        await interaction.reply({ content: "There was an error while executing this command!", ephemeral: true });
+        await interaction.reply({
+            content: "There was an error while executing this command!",
+            ephemeral: true,
+        });
+
     }
+
 });
 
 
 console.log("no funka, World!");
-
-(async ()=>{
-    console.log('Started refreshing application (/) commands.');   
-    try {
-        console.log('Started refreshing application (/) commands.');
-        console.log(commands);
-        await rest.put(
-            Routes.applicationGuildCommands(applicationId, guildId),
-            { body: commands },
-        );
-
-        console.log('Successfully reloaded application (/) commands.');
-    } catch (error) {
-        console.error(error);
-    }
-})();
