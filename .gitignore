@@ -226,3 +226,7 @@ dist
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/node,macos,linux,visualstudiocode,yarn
+
+
+#code structure
+project_structure.text
