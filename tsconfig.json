@@ -12,7 +12,12 @@
       "allowSyntheticDefaultImports": true,
       "skipLibCheck": true,
       "declaration": true,
-      "resolveJsonModule": true
+      "resolveJsonModule": true,
+      "paths": {
+        "@types": ["./src/types"],
+        "@config": ["./src/config"],
+        "@commands": ["./src/commands"],
+      }
     },
     "include": ["src/**/*.ts", "src/**/*.json"],
   }
