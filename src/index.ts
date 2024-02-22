@@ -1,53 +1,41 @@
 import "dotenv/config";
-import DiscordClient from "./config/client";
-import ping from "./commands/ping";
-import config from "./config/config";
+import DiscordClient from "./config/DiscordClient";
+import { ping } from "./commands";
+import { config } from "./config";
 import { REST, Routes, Events } from "discord.js";
 
-
-const {token, applicationId, guildId} = config.getConfig();
+const { token, applicationId, guildId } = config.getConfig();
 
 const commands = [ping.data.toJSON()];
 
-
 const rest = new REST().setToken(token);
 
-(async ()=>{
-    console.log('Started refreshing application (/) commands.');   
+(async () => {
+    console.log("Started refreshing application (/) commands.");
     try {
-        console.log('Started refreshing application (/) commands.');
+        console.log("Started refreshing application (/) commands.");
         await rest.put(
             Routes.applicationGuildCommands(applicationId, guildId),
-            { body: commands },
+            { body: commands }
         );
 
-        console.log('Successfully reloaded application (/) commands.');
+        console.log("Successfully reloaded application (/) commands.");
     } catch (error) {
         console.error(error);
     }
 })();
 
 
-
-
-
-console.log("funka, World!");
-
 const client = new DiscordClient();
 client.commands.set(ping.data.name, ping);
 
-client.init(); 
+client.init();
 client.commands.set(ping.data.name, ping);
-
-client.on("ready", () => {
-    console.info(`Logged in as ${client.user.tag}!`);
-    client.user.setActivity("with ts");
-});
 
 
 client.on(Events.InteractionCreate, async (interaction) => {
+    console.log("interaction", interaction);
     if (!interaction.isChatInputCommand()) return;
-
 
     const commandName = interaction.commandName;
     const command = client.commands.get(commandName);
@@ -65,10 +53,5 @@ client.on(Events.InteractionCreate, async (interaction) => {
             content: "There was an error while executing this command!",
             ephemeral: true,
         });
-
     }
-
 });
-
-
-console.log("no funka, World!");
