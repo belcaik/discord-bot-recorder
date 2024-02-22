@@ -11,7 +11,8 @@ export default class Ready implements THandler {
         this.name = "ready";
         this.callback = () => {
             console.info(`Logged in as ${this.client.user?.tag}`);
-            this.client.user?.setActivity("with ts handler");
+            this.client.user?.setActivity("【ドンドットット】");
+            this.client.user?.setStatus("dnd");
         };
 
         this.init();
