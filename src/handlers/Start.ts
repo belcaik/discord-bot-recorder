@@ -26,9 +26,14 @@ export default class Start {
 
     async registerCommands() {
         try {
+                // TODO: check if the commands are already registered
+                
             console.info("Started refreshing application (/) commands.");
 
             const commands = this.client.commands.map((command) => command.data.toJSON());
+
+            console.log("commands", {appId: this.client.applicationId, guildId: this.client.guildId, commands})
+
 
             await this.rest.put(
                 Routes.applicationGuildCommands(
