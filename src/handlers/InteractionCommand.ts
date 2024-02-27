@@ -1,6 +1,7 @@
 import DiscordClient from "../config/DiscordClient";
+import TCommand from "../types/TCommand";
 import THandler from "../types/THandler";
-import { Collection, Events, Interaction } from "discord.js";
+import { ChatInputCommandInteraction, Collection, Events, Interaction } from "discord.js";
 
 export default class InteractionCommand implements THandler {
     client: DiscordClient;
@@ -19,27 +20,27 @@ export default class InteractionCommand implements THandler {
     // TODO: investigate why this is taking too long to execute and fix it
     async callback(interaction: Interaction) {
         console.time("interaction");
+        console.timeLog("interaction");
         if (!interaction.isChatInputCommand()) return;
 
-        await interaction.deferReply({ ephemeral: true });
+        const chatInteraction = interaction as ChatInputCommandInteraction;
         try {
-            const commandName = interaction.commandName;
-            const command = this.commands.get(commandName);
+            
+            // await chatInteraction.deferReply();
+            const commandName = chatInteraction.commandName;
+            console.timeLog("interaction", "commandName", commandName);
 
-            if (!command) {
-                console.error("Command not found");
-                return;
-            }
+            const command: TCommand = this.commands.get(commandName);
+            // console.timeLog("interaction", "command", command);
+            if (!command) return;
 
-            await command.execute(interaction);
+            await command.execute(chatInteraction);
+
+
             console.timeEnd("interaction");
         } catch (error) {
             console.error("error trying execute", error);
             console.timeEnd("interaction");
-            interaction.reply({
-                content: "There was an error while executing this command!",
-                ephemeral: true,
-            });
         }
     }
 

@@ -1,10 +1,14 @@
 import InteractionCommand from "../handlers/InteractionCommand";
 import Ready from "../handlers/Ready";
 import Start from "../handlers/Start";
+import TCommand from "../types/TCommand";
 import config from "./config";
+import { 
+    GatewayIntentBits
+} from "discord.js"
 import { Client, Collection } from "discord.js";
 
-const { token, intents, applicationId, guildId } = config.getConfig();
+const { token, applicationId, guildId } = config.getConfig();
 
 class DiscordClient extends Client {
     applicationId: string = applicationId;
@@ -12,11 +16,18 @@ class DiscordClient extends Client {
     guildId: string = guildId;
     constructor() {
         super({
-            intents: intents,
+            intents: [
+                GatewayIntentBits.GuildMembers,
+                GatewayIntentBits.GuildVoiceStates,
+                GatewayIntentBits.Guilds,
+                GatewayIntentBits.GuildMessages,
+                GatewayIntentBits.GuildMessageReactions,
+                
+            ]
         });
     }
     /* eslint-disable @typescript-eslint/no-explicit-any */
-    public commands: Collection<string, any> = new Collection();
+    public commands: Collection<string, TCommand> = new Collection();
 
     public init() {
         new Start(this, token);
