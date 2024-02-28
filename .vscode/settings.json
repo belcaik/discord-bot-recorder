@@ -4,7 +4,8 @@
     "scrollbar.shadow": "#00000000"
   },
   "conventionalCommits.scopes": [
-    "config"
+    "config",
+    "commands"
   ],
   "search.exclude": {
     "**/.yarn": true,
