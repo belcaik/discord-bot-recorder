@@ -1,6 +1,6 @@
 {
   "name": "discord-bot-recorder",
-  "packageManager": "yarn@4.1.0",
+  "packageManager": "yarn@4.1.1",
   "scripts": {
     "build": "tsc --checkJs --allowJs --outDir ./dist --rootDir ./src ",
     "start": "dotenv -e .env.local node ./dist/index.js",
