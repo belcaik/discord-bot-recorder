@@ -1,5 +1,5 @@
-import DiscordClient from "../config/DiscordClient";
-import THandler from "../types/THandler";
+import DiscordClient from "@config/DiscordClient";
+import {THandler} from "@types";
 
 export default class Ready implements THandler {
     client: DiscordClient;

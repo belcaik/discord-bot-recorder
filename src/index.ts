@@ -1,6 +1,6 @@
 import "dotenv/config";
-import DiscordClient from "./config/DiscordClient";
-import { ping, recordCall } from "./commands";
+import DiscordClient from "@config/DiscordClient";
+import { ping, recordCall } from "@commands";
 
 const client = new DiscordClient();
 

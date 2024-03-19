@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction } from "discord.js";
-import TCommand from "../types/TCommand";
+import {TCommand} from "@types";
 
 export default class Ping implements TCommand {
     private static instance: Ping;

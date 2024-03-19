@@ -1,5 +1,5 @@
 import { REST, Routes } from "discord.js";
-import DiscordClient from "../config/DiscordClient";
+import DiscordClient from "@config/DiscordClient";
 
 export default class Start {
     client: DiscordClient;
@@ -32,7 +32,7 @@ export default class Start {
 
             const commands = this.client.commands.map((command) => command.data.toJSON());
 
-            console.log("commands", {appId: this.client.applicationId, guildId: this.client.guildId, commands})
+            // console.log("commands", {appId: this.client.applicationId, guildId: this.client.guildId, commands})
 
 
             await this.rest.put(

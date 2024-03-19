@@ -12,8 +12,8 @@ import {
     entersState,
     joinVoiceChannel,
 } from "@discordjs/voice";
-import TCommand from "../types/TCommand";
-import TConnectionOptions from "../types/TConnectionOptions";
+import { TCommand, TConnectionOptions } from "@types";
+import { createListeningStream } from "@lib/ListeningStream";
 
 export default class Record implements TCommand {
     private static instance: Record;
@@ -95,7 +95,7 @@ export default class Record implements TCommand {
 
     private stopRecording(interaction: CommandInteraction) {
         // console.log("stop recording");
-        console.info(interaction);
+        // console.info(interaction);
         try {
             if (this.connection) {
                 this.connection.destroy();
@@ -139,6 +139,7 @@ export default class Record implements TCommand {
 
             receiver.speaking.on("start", (userId) => {
                 console.log("start", userId);
+                createListeningStream(receiver, userId )
             });
 
             receiver.speaking.on("end", (userId) => {

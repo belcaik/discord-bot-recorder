@@ -1,6 +1,6 @@
 import { entersState, joinVoiceChannel, VoiceConnection, VoiceConnectionStatus } from '@discordjs/voice';
 import { Client, CommandInteraction, GuildMember, Snowflake } from 'discord.js';
-// import { createListeningStream } from './createListeningStream';
+import { createListeningStream } from '@lib/ListeningStream';
 
 export async function join(
 	interaction: CommandInteraction,
@@ -32,7 +32,7 @@ export async function join(
 		receiver.speaking.on('start', (userId) => {
 			if (recordable.has(userId)) {
                 console.log('start', userId);
-				// createListeningStream(receiver, userId, client.users.cache.get(userId));
+				createListeningStream(receiver, userId, client.users.cache.get(userId));
 			}
 		});
 	} catch (error) {
@@ -59,7 +59,7 @@ export async function record(
             console.log('start', userId);
             console.log('client.users.cache.get(userId)', client.users.cache.get(userId));
             console.log('receiver', receiver);
-            // createListeningStream(receiver, userId, client.users.cache.get(userId));
+            createListeningStream(receiver, userId, client.users.cache.get(userId));
 		}
 
 		await interaction.reply({ ephemeral: true, content: 'Listening!' });

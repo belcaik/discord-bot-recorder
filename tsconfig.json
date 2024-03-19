@@ -1,23 +1,37 @@
 {
     "compilerOptions": {
-      "lib": ["ESNext"],
-      "module": "CommonJS",
-      "moduleResolution": "Node",
-      "target": "ESNext",
-      "outDir": "dist",
-      "sourceMap": true,
-      "esModuleInterop": true,
-      "experimentalDecorators": true,
-      "emitDecoratorMetadata": true,
-      "allowSyntheticDefaultImports": true,
-      "skipLibCheck": true,
-      "declaration": true,
-      "resolveJsonModule": true,
-      "paths": {
-        "@types": ["./src/types"],
-        "@config": ["./src/config"],
-        "@commands": ["./src/commands"],
-      }
+        "lib": ["ESNext"],
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "target": "ESNext",
+        "outDir": "dist",
+        "baseUrl": ".",
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
+        "declaration": true,
+        "resolveJsonModule": true,
+        "typeRoots": ["src/types"],
+        "paths": {
+            "@commands/*": ["src/commands/*"],
+            "@config/*": ["src/config/*"],
+            "@handlers/*": ["src/handlers/*"],
+            "@lib/*": ["src/lib/*"],
+            "@types": ["src/types"],
+            "@config": ["src/config"],
+            "@lib": ["src/lib"],
+            "@handlers": ["src/handlers"],
+            "@commands": ["src/commands"]
+        }
     },
     "include": ["src/**/*.ts", "src/**/*.json"],
-  }
+    "ts-node": {
+        "require": ["tsconfig-paths/register"]
+    },
+    "ts-node-dev": {
+        "require": ["tsconfig-paths/register"]
+    },
+}
