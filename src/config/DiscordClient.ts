@@ -1,11 +1,9 @@
-import InteractionCommand from "../handlers/InteractionCommand";
-import Ready from "../handlers/Ready";
-import Start from "../handlers/Start";
-import TCommand from "../types/TCommand";
-import config from "./config";
-import { 
-    GatewayIntentBits
-} from "discord.js"
+import InteractionCommand from "@handlers/InteractionCommand";
+import Ready from "@handlers/Ready";
+import Start from "@handlers/Start";
+import { TCommand } from "@types";
+import {config} from "@config";
+import { GatewayIntentBits } from "discord.js";
 import { Client, Collection } from "discord.js";
 
 const { token, applicationId, guildId } = config.getConfig();
@@ -22,8 +20,7 @@ class DiscordClient extends Client {
                 GatewayIntentBits.Guilds,
                 GatewayIntentBits.GuildMessages,
                 GatewayIntentBits.GuildMessageReactions,
-                
-            ]
+            ],
         });
     }
     /* eslint-disable @typescript-eslint/no-explicit-any */

@@ -1,4 +1,4 @@
-import TConfig from "../types/TConfig";
+import {TConfig} from "@types";
 
 class config {
     public static getConfig(): TConfig {
