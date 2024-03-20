@@ -13,7 +13,7 @@ import {
     joinVoiceChannel,
 } from "@discordjs/voice";
 import { TCommand, TConnectionOptions } from "@types";
-import { createListeningStream } from "@lib/ListeningStream";
+import ListeningStream from "@lib/ListeningStream";
 
 export default class Record implements TCommand {
     private static instance: Record;
@@ -21,6 +21,7 @@ export default class Record implements TCommand {
     execute: (interaction: CommandInteraction) => Promise<void>;
     private connection: VoiceConnection;
     private voiceState: VoiceState;
+    private startTimestamp: number;
 
     private constructor() {
         this.data = new SlashCommandBuilder()
@@ -97,9 +98,22 @@ export default class Record implements TCommand {
         // console.log("stop recording");
         // console.info(interaction);
         try {
-            if (this.connection) {
-                this.connection.destroy();
+            if (!this.connection) {
+                throw new Error("Connection not found");
             }
+            this.connection.destroy();
+            const recordingDuration = Date.now() - this.startTimestamp;
+
+            const recordingDirectory = `./recordings/${this.startTimestamp}`;
+
+            interaction.followUp({
+                content: `Recording stopped! Duration: ${recordingDuration}ms 
+                \n You can find the recording in the directory: ${recordingDirectory}
+                \n the transcript will be available soon!
+                `,
+            });
+
+    
         } catch (error) {
             console.error("error trying to stop recording", error);
         }
@@ -135,11 +149,12 @@ export default class Record implements TCommand {
 
     private handleReceiver() {
         try {
+            this.startTimestamp = Date.now();
             const receiver = this.connection.receiver;
 
             receiver.speaking.on("start", (userId) => {
                 console.log("start", userId);
-                createListeningStream(receiver, userId )
+                ListeningStream.createListeningStream(receiver, userId, undefined, this.startTimestamp)
             });
 
             receiver.speaking.on("end", (userId) => {
